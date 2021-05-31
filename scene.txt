@@ -1,0 +1,6 @@
+camera 0 0 0 
+alpha 60 
+resolution 1280 720
+light 0 0 0 
+
+
