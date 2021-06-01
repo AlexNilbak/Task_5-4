@@ -13,7 +13,6 @@
 using namespace std;
 
 int main() {
-	double PI = 3.14159;
 	double maxDist = 0;
 	double minDist = DBL_MAX;
 	vector<Figure*> figs;
@@ -34,7 +33,6 @@ int main() {
 	in1 >> x >> y;
 	in1 >> name;
 	in1 >> xl >> yl >> zl;
-
 	if (x % 2 != 0) {
 		x++;
 	}
@@ -44,8 +42,10 @@ int main() {
 
     cimg_library::CImg<unsigned char> image(x,y,1,3,0);
     cimg_library::CImgDisplay display(image, "Raytracing");
-	double k = static_cast<double>(y) * sqrt( 2 / (1 - cos(alpha / 180 * PI)) - 1) / 2;
-	printf("%f\n", k);
+
+	double k = static_cast<double>(y) * sqrt( 2 / (1 - cos(alpha / 180 * 3.14159)) - 1) / 2;
+	printf("Distance to the screen = %f\n", k);
+
 	while (!in2.eof()) {
 		in2 >> name;
 		if (name == "tetra") {
@@ -83,7 +83,7 @@ int main() {
         double illumination;
         if (maxDist == minDist) {
 			illumination = 0;
-        } 
+        }
 		else {
 			illumination = (255.0 / (maxDist - minDist)) * o->getCenter().length() - (255.0 * minDist) / (maxDist - minDist);
         }
@@ -95,13 +95,13 @@ int main() {
 	int c = figs.size();
 	while (c != 1) {
 		for (int i = 1; i < c; i++) {
-			if ( (figs[i]->getCenter().y - k) < (figs[i - 1]->getCenter().y - k) ) {
+			if ( figs[i]->getCenter().length() > figs[i - 1]->getCenter().length() ) {
 				f = figs[i];
 				figs[i] = figs[i - 1];
 				figs[i - 1] = f;
 			}
-			c--;
 		}
+		c--;
 	}
 
 

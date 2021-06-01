@@ -58,7 +58,7 @@ public:
 	Color pixelColor(double x, double y, double z) override {
 		Vector n(Ap, Bp, Cp);
 		n = n.normalize();
-		Vector a(x- xl, y- yl, z - zl);
+		Vector a(xl - x, yl - y, zl - z);
 		a = a.normalize();
 		Color c = col;
 		double light = n * a;
